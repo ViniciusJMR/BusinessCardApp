@@ -25,9 +25,11 @@
         app:layout_constraintTop_toTopOf="@id/tvTitle"
         app:layout_constraintTop_toBottomOf="parent"
         tools:itemCount="8"
+        tools:listitem="@layout/item_business_card"
         />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/btAddCard"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="16dp"
