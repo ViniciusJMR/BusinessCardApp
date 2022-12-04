@@ -8,11 +8,22 @@ import me.dio.vinicius.businesscard.domain.BusinessCard
 
 class MainViewModel(private val repository: BusinessCardRepository) : ViewModel(){
 
+    var selectedCard: BusinessCard? =
+        BusinessCard(0, "","", "", "", "")
+
     fun insert(businessCard: BusinessCard) {
         repository.insert(businessCard)
     }
 
     fun getAll(): LiveData<List<BusinessCard>> = repository.getAll()
+
+    fun delete(businessCard: BusinessCard) {
+        repository.delete(businessCard)
+    }
+
+    fun update(businessCard: BusinessCard) {
+        repository.delete(businessCard)
+    }
 }
 
 class MainViewModelFactory(private val repository: BusinessCardRepository):

@@ -38,7 +38,7 @@ class AddBusinessCardActivity : AppCompatActivity() {
                 backgroundColor = binding.tvNewCardColor.editText?.text.toString()
             )
             mainViewModel.insert(businessCard)
-            Snackbar.make(binding.root, R.string.label_show_success, Snackbar.LENGTH_SHORT).show()
+            Snackbar.make(binding.root, R.string.label_show_insert_success, Snackbar.LENGTH_SHORT).show()
             finish()
         }
     }

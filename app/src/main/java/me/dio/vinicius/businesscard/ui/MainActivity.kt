@@ -7,6 +7,7 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import me.dio.vinicius.businesscard.App
 import me.dio.vinicius.businesscard.databinding.ActivityMainBinding
+import me.dio.vinicius.businesscard.domain.BusinessCard
 import me.dio.vinicius.businesscard.util.Image
 import me.dio.vinicius.businesscard.viewmodel.MainViewModel
 import me.dio.vinicius.businesscard.viewmodel.MainViewModelFactory
@@ -35,8 +36,19 @@ class MainActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
-        adapter.listenerShare = {card ->
+
+        adapter.listenerShare = { card ->
             Image.share(this, card)
+        }
+
+        adapter.listenerDelete = { card ->
+            mainViewModel.delete(card)
+        }
+
+        adapter.listenerEdit = { card ->
+            mainViewModel.selectedCard = card
+            val intent = Intent(this@MainActivity, EditBusinessCardActivity::class.java)
+            startActivity(intent)
         }
     }
 

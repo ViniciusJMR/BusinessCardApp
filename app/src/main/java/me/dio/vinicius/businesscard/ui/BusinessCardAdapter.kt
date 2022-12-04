@@ -10,10 +10,14 @@ import androidx.recyclerview.widget.RecyclerView
 import me.dio.vinicius.businesscard.databinding.ItemBusinessCardBinding
 import me.dio.vinicius.businesscard.domain.BusinessCard
 
-class BusinessCardAdapter:
+class BusinessCardAdapter(
+):
     ListAdapter<BusinessCard, BusinessCardAdapter.ViewHolder>(DiffCallback()) {
 
+    var listenerEdit: (BusinessCard) -> Unit = {}
+    var listenerDelete: (BusinessCard) -> Unit = {}
     var listenerShare: (View) -> Unit = {}
+
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val inflater = LayoutInflater.from(parent.context)
@@ -38,6 +42,17 @@ class BusinessCardAdapter:
             binding.mcvCard.setOnClickListener{
                 listenerShare(it)
             }
+            binding.ivDeleteCard.setOnClickListener{
+                listenerDelete(getItem(adapterPosition))
+                notifyItemRemoved(adapterPosition)
+                notifyDataSetChanged()
+            }
+            binding.ivEditCard.setOnClickListener{
+                listenerEdit(getItem(adapterPosition))
+                notifyItemChanged(adapterPosition)
+                notifyDataSetChanged()
+            }
+
 
         }
     }
