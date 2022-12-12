@@ -23,6 +23,7 @@ class EditBusinessCardActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
+
         fillInfo()
 
         insertListeners()
@@ -34,17 +35,7 @@ class EditBusinessCardActivity : AppCompatActivity() {
         }
 
         binding.btConfirm.setOnClickListener {
-
-            val businessCard = BusinessCard(
-                id = id,
-                name = binding.tvUpdateCardName.editText?.text.toString(),
-                business = binding.tvUpdateCardBusiness.editText?.text.toString(),
-                phone = binding.tvUpdateCardPhone.editText?.text.toString(),
-                email = binding.tvUpdateCardEmail.editText?.text.toString(),
-                backgroundColor = binding.tvUpdateCardColor.editText?.text.toString()
-            )
-            mainViewModel.update(businessCard)
-//            mainViewModel.update(binding.card!!)
+            mainViewModel.update(binding.card!!)
             Snackbar.make(binding.root, R.string.label_show_update_success, Snackbar.LENGTH_SHORT).show()
             finish()
         }
@@ -52,20 +43,8 @@ class EditBusinessCardActivity : AppCompatActivity() {
 
     private fun fillInfo(){
         id = intent.extras?.getInt("id")!!
-        mainViewModel.getById(id)
-        mainViewModel.state.observe(this) {
-            when(it){
-                MainViewModel.State.DONE -> {
-                    binding.tvUpdateCardId.text = id.toString()
-                    binding.card = mainViewModel.card.value
-                    Log.d("FILL", id.toString())
-                    Log.d("FILL", binding.card.toString())
-                    Log.d("FILL", mainViewModel.card.value.toString())
-                }
-                MainViewModel.State.LOADING -> TODO()
-                MainViewModel.State.ERROR -> TODO()
-            }
-
+        mainViewModel.getById(id).observe(this) {
+            binding.card = it
         }
     }
 }

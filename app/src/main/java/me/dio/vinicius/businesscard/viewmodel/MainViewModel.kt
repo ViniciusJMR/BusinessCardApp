@@ -19,7 +19,8 @@ class MainViewModel(private val repository: BusinessCardRepository) : ViewModel(
     var selectedCard: BusinessCard? = null
     private val _card = MutableLiveData<BusinessCard>()
     val card : LiveData<BusinessCard> = _card
-    val state = MutableLiveData<State>()
+    private val _state = MutableLiveData<State>()
+    val state : LiveData<State> = _state
 
     fun insert(businessCard: BusinessCard) {
         repository.insert(businessCard)
@@ -27,13 +28,13 @@ class MainViewModel(private val repository: BusinessCardRepository) : ViewModel(
 
     fun getAll(): LiveData<List<BusinessCard>> = repository.getAll()
 
-    fun getById(id:Int){
-        state.postValue(State.LOADING)
-        val c = repository.getById(id)
-        _card.postValue(c.value)
-        Log.d("GET", "${_card.value.toString()}  $id")
-        state.postValue(State.DONE)
-    }
+    fun getById(id:Int) = repository.getById(id)
+//        _state.value = State.LOADING
+//        val c = repository.getById(id)
+//        _card.value = c.value
+//        Log.d("GET", "${_card.value.toString()} - $id")
+//        _state.value = State.DONE
+//    }
 
     fun delete(businessCard: BusinessCard) {
         repository.delete(businessCard)
