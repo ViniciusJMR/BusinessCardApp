@@ -30,7 +30,6 @@ class MainActivity : AppCompatActivity() {
         insertListener()
     }
 
-
     private fun insertListener() {
         binding.btAddCard.setOnClickListener {
             val intent = Intent(this@MainActivity, AddBusinessCardActivity::class.java)

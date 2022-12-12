@@ -2,6 +2,7 @@ package me.dio.vinicius.businesscard.ui
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
 import androidx.activity.viewModels
 import com.google.android.material.snackbar.Snackbar
 import me.dio.vinicius.businesscard.App
@@ -21,25 +22,13 @@ class AddBusinessCardActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
-        insertListeners()
+        binding.card = BusinessCard()
+        binding.activity = this
     }
 
-    private fun insertListeners(){
-        binding.btClose.setOnClickListener {
-           finish()
-        }
-
-        binding.btConfirm.setOnClickListener {
-            val businessCard = BusinessCard(
-                name = binding.tvNewCardName.editText?.text.toString(),
-                business = binding.tvNewCardBusiness.editText?.text.toString(),
-                phone = binding.tvNewCardPhone.editText?.text.toString(),
-                email = binding.tvNewCardEmail.editText?.text.toString(),
-                backgroundColor = binding.tvNewCardColor.editText?.text.toString()
-            )
-            mainViewModel.insert(businessCard)
-            Snackbar.make(binding.root, R.string.label_show_insert_success, Snackbar.LENGTH_SHORT).show()
-            finish()
-        }
+    fun confirmCard(){
+        mainViewModel.insert(binding.card!!)
+        Snackbar.make(binding.root, R.string.label_show_insert_success, Snackbar.LENGTH_SHORT).show()
+        finish()
     }
 }
