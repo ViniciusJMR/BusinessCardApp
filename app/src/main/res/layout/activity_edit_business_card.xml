@@ -8,6 +8,10 @@
         <variable
             name="card"
             type="me.dio.vinicius.businesscard.domain.BusinessCard" />
+
+        <variable
+            name="activity"
+            type="me.dio.vinicius.businesscard.ui.EditBusinessCardActivity" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -21,7 +25,7 @@
             android:layout_height="50dp"
             android:background="?attr/actionBarItemBackground"
             android:src="@drawable/ic_close_24"
-            android:contentDescription="teste"
+            android:onClick="@{() -> activity.finish()}"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -142,6 +146,7 @@
             android:layout_height="wrap_content"
             android:layout_margin="16dp"
             android:text="@string/label_confirm"
+            android:onClick="@{() -> activity.confirmCard()}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />

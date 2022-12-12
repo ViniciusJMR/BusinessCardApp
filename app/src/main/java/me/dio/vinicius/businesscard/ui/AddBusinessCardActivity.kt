@@ -1,9 +1,8 @@
 package me.dio.vinicius.businesscard.ui
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.View
 import androidx.activity.viewModels
+import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.snackbar.Snackbar
 import me.dio.vinicius.businesscard.App
 import me.dio.vinicius.businesscard.R
