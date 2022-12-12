@@ -7,9 +7,9 @@ import androidx.room.PrimaryKey
 data class BusinessCard(
     @PrimaryKey(autoGenerate = true)
     val id: Int = 0,
-    val name: String,
-    val email: String,
-    val business: String,
-    val phone: String,
-    val backgroundColor: String
+    var name: String,
+    var email: String,
+    var business: String,
+    var phone: String,
+    var backgroundColor: String
 )

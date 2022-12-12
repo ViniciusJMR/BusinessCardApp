@@ -1,6 +1,7 @@
 package me.dio.vinicius.businesscard.ui
 
 import android.graphics.Color
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,7 +12,7 @@ import me.dio.vinicius.businesscard.databinding.ItemBusinessCardBinding
 import me.dio.vinicius.businesscard.domain.BusinessCard
 
 class BusinessCardAdapter(
-):
+) :
     ListAdapter<BusinessCard, BusinessCardAdapter.ViewHolder>(DiffCallback()) {
 
     var listenerEdit: (BusinessCard) -> Unit = {}
@@ -32,34 +33,35 @@ class BusinessCardAdapter(
 
     inner class ViewHolder(
         private val binding: ItemBusinessCardBinding
-    ) :RecyclerView.ViewHolder(binding.root) {
-        fun bind(item: BusinessCard){
+    ) : RecyclerView.ViewHolder(binding.root) {
+        fun bind(item: BusinessCard) {
+            binding.tvCardId.text = item.id.toString()
             binding.tvCardName.text = item.name
             binding.tvCardPhone.text = item.phone
             binding.tvCardEmail.text = item.email
             binding.tvCardBusiness.text = item.business
-            binding.mcvCard.setCardBackgroundColor(Color.parseColor(item.backgroundColor))
-            binding.mcvCard.setOnClickListener{
+            if (item.backgroundColor != "")
+                binding.mcvCard.setCardBackgroundColor(Color.parseColor(item.backgroundColor))
+            else
+                binding.mcvCard.setCardBackgroundColor(Color.parseColor("#FFFFFF"))
+
+            binding.mcvCard.setOnClickListener {
                 listenerShare(it)
             }
-            binding.ivDeleteCard.setOnClickListener{
+            binding.ivDeleteCard.setOnClickListener {
                 listenerDelete(getItem(adapterPosition))
                 notifyItemRemoved(adapterPosition)
-                notifyDataSetChanged()
             }
-            binding.ivEditCard.setOnClickListener{
+            binding.ivEditCard.setOnClickListener {
                 listenerEdit(getItem(adapterPosition))
                 notifyItemChanged(adapterPosition)
-                notifyDataSetChanged()
             }
-
-
         }
     }
 
 }
 
-class DiffCallback: DiffUtil.ItemCallback<BusinessCard>() {
+class DiffCallback : DiffUtil.ItemCallback<BusinessCard>() {
     override fun areItemsTheSame(oldItem: BusinessCard, newItem: BusinessCard) =
         oldItem == newItem
 

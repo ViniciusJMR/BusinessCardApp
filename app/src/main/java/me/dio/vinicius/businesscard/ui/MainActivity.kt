@@ -3,6 +3,7 @@ package me.dio.vinicius.businesscard.ui
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import me.dio.vinicius.businesscard.App
@@ -46,8 +47,8 @@ class MainActivity : AppCompatActivity() {
         }
 
         adapter.listenerEdit = { card ->
-            mainViewModel.selectedCard = card
             val intent = Intent(this@MainActivity, EditBusinessCardActivity::class.java)
+            intent.putExtra("id", card.id)
             startActivity(intent)
         }
     }

@@ -2,6 +2,7 @@ package me.dio.vinicius.businesscard.ui
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import androidx.activity.viewModels
 import com.google.android.material.snackbar.Snackbar
 import me.dio.vinicius.businesscard.App
@@ -17,12 +18,14 @@ class EditBusinessCardActivity : AppCompatActivity() {
     private val mainViewModel: MainViewModel by viewModels {
         MainViewModelFactory((application as App).repository)
     }
+    private var id: Int = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
-        insertListeners()
         fillInfo()
+
+        insertListeners()
     }
 
     private fun insertListeners(){
@@ -31,7 +34,9 @@ class EditBusinessCardActivity : AppCompatActivity() {
         }
 
         binding.btConfirm.setOnClickListener {
+
             val businessCard = BusinessCard(
+                id = id,
                 name = binding.tvUpdateCardName.editText?.text.toString(),
                 business = binding.tvUpdateCardBusiness.editText?.text.toString(),
                 phone = binding.tvUpdateCardPhone.editText?.text.toString(),
@@ -39,16 +44,28 @@ class EditBusinessCardActivity : AppCompatActivity() {
                 backgroundColor = binding.tvUpdateCardColor.editText?.text.toString()
             )
             mainViewModel.update(businessCard)
+//            mainViewModel.update(binding.card!!)
             Snackbar.make(binding.root, R.string.label_show_update_success, Snackbar.LENGTH_SHORT).show()
             finish()
         }
     }
 
     private fun fillInfo(){
-        binding.tvUpdateCardName.editText?.setText(mainViewModel.selectedCard?.name ?: "1111")
-        binding.tvUpdateCardEmail.editText?.setText(mainViewModel.selectedCard?.email ?: "1111")
-        binding.tvUpdateCardPhone.editText?.setText(mainViewModel.selectedCard?.phone?: "1111")
-        binding.tvUpdateCardBusiness.editText?.setText(mainViewModel.selectedCard?.business ?: "")
-        binding.tvUpdateCardColor.editText?.setText(mainViewModel.selectedCard?.backgroundColor ?: "")
+        id = intent.extras?.getInt("id")!!
+        mainViewModel.getById(id)
+        mainViewModel.state.observe(this) {
+            when(it){
+                MainViewModel.State.DONE -> {
+                    binding.tvUpdateCardId.text = id.toString()
+                    binding.card = mainViewModel.card.value
+                    Log.d("FILL", id.toString())
+                    Log.d("FILL", binding.card.toString())
+                    Log.d("FILL", mainViewModel.card.value.toString())
+                }
+                MainViewModel.State.LOADING -> TODO()
+                MainViewModel.State.ERROR -> TODO()
+            }
+
+        }
     }
 }
