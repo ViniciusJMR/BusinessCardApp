@@ -35,27 +35,26 @@ class BusinessCardAdapter(
         private val binding: ItemBusinessCardBinding
     ) : RecyclerView.ViewHolder(binding.root) {
         fun bind(item: BusinessCard) {
-            binding.tvCardId.text = item.id.toString()
-            binding.tvCardName.text = item.name
-            binding.tvCardPhone.text = item.phone
-            binding.tvCardEmail.text = item.email
-            binding.tvCardBusiness.text = item.business
+            binding.cardViewHolder = this
+            binding.card = item
             if (item.backgroundColor != "")
                 binding.mcvCard.setCardBackgroundColor(Color.parseColor(item.backgroundColor))
             else
                 binding.mcvCard.setCardBackgroundColor(Color.parseColor("#FFFFFF"))
+        }
 
-            binding.mcvCard.setOnClickListener {
-                listenerShare(it)
-            }
-            binding.ivDeleteCard.setOnClickListener {
-                listenerDelete(getItem(adapterPosition))
-                notifyItemRemoved(adapterPosition)
-            }
-            binding.ivEditCard.setOnClickListener {
-                listenerEdit(getItem(adapterPosition))
-                notifyItemChanged(adapterPosition)
-            }
+        fun deleteCard(v: View){
+            listenerDelete(getItem(adapterPosition))
+            notifyItemRemoved(adapterPosition)
+        }
+
+        fun editCard(v: View){
+            listenerEdit(getItem(adapterPosition))
+            notifyItemChanged(adapterPosition)
+        }
+
+        fun shareCard(v: View){
+            listenerShare(v)
         }
     }
 

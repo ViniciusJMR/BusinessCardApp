@@ -1,89 +1,106 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.google.android.material.card.MaterialCardView
-    android:id="@+id/mcvCard"
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="180dp"
-    app:layout_constraintDimensionRatio="16:9"
-    android:layout_margin="16dp"
-    android:checkable="true"
-    android:clickable="true"
-    android:focusable="true"
-    app:cardCornerRadius="16dp"
-    app:cardElevation="8dp">
-    <androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="card"
+            type="me.dio.vinicius.businesscard.domain.BusinessCard" />
+
+        <variable
+            name="cardViewHolder"
+            type="me.dio.vinicius.businesscard.ui.BusinessCardAdapter.ViewHolder" />
+    </data>
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/mcvCard"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_margin="16dp">
+        android:layout_height="180dp"
+        android:layout_margin="16dp"
+        android:onClick="@{cardViewHolder::shareCard}"
+        android:checkable="true"
+        android:clickable="true"
+        android:focusable="true"
+        app:cardCornerRadius="16dp"
+        app:cardElevation="8dp"
+        app:layout_constraintDimensionRatio="16:9">
 
-        <TextView
-            android:id="@+id/tvCardId"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:visibility="gone"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            />
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="16dp">
 
-        <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/tvCardName"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textStyle="bold"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:text="Vinicius Rodrigues"
-            />
+            <TextView
+                android:id="@+id/tvCardId"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:visibility="gone"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
-        <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/tvCardPhone"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tvCardName"
-            tools:text="Telefone"
-            />
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/tvCardName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textStyle="bold"
+                android:text="@{card.name}"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="Vinicius Rodrigues" />
 
-        <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/tvCardEmail"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tvCardPhone"
-            tools:text="E-mail"/>
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/tvCardPhone"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="@{card.phone}"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tvCardName"
+                tools:text="Telefone" />
 
-        <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/tvCardBusiness"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
-            tools:text="Nome da empresa"
-            />
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/tvCardEmail"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="@{card.email}"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tvCardPhone"
+                tools:text="E-mail" />
 
-        <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/ivDeleteCard"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            android:src="@drawable/ic_baseline_delete_24"
-            android:layout_margin="4dp"/>
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/tvCardBusiness"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@{card.business}"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                tools:text="Nome da empresa" />
 
-        <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/ivEditCard"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:layout_constraintTop_toTopOf="@id/ivDeleteCard"
-            app:layout_constraintBottom_toBottomOf="@id/ivDeleteCard"
-            app:layout_constraintEnd_toStartOf="@id/ivDeleteCard"
-            android:src="@drawable/ic_baseline_edit_24"
-            android:layout_marginEnd="16dp"/>
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/ivDeleteCard"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="4dp"
+                android:onClick="@{cardViewHolder::deleteCard}"
+                android:src="@drawable/ic_baseline_delete_24"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/ivEditCard"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="16dp"
+                android:onClick="@{cardViewHolder::editCard}"
+                android:src="@drawable/ic_baseline_edit_24"
+                app:layout_constraintBottom_toBottomOf="@id/ivDeleteCard"
+                app:layout_constraintEnd_toStartOf="@id/ivDeleteCard"
+                app:layout_constraintTop_toTopOf="@id/ivDeleteCard" />
 
-</com.google.android.material.card.MaterialCardView>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </com.google.android.material.card.MaterialCardView>
+</layout>
