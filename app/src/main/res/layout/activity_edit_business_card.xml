@@ -122,23 +122,15 @@
                 android:inputType="text" />
         </com.google.android.material.textfield.TextInputLayout>
 
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/tvUpdateCardColor"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-            android:layout_width="0dp"
+
+        <Spinner
+            android:id="@+id/sUpdateCardColor"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="16dp"
-            android:hint="@string/label_color"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tvUpdateCardBusiness">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:text="@={card.backgroundColor}"
-                android:inputType="text" />
-        </com.google.android.material.textfield.TextInputLayout>
+            app:layout_constraintTop_toBottomOf="@+id/tvUpdateCardBusiness" />
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btConfirm"

@@ -2,11 +2,13 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
-    
+
     <data>
+
         <variable
             name="card"
             type="me.dio.vinicius.businesscard.domain.BusinessCard" />
+
         <variable
             name="activity"
             type="me.dio.vinicius.businesscard.ui.AddBusinessCardActivity" />
@@ -22,8 +24,8 @@
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:background="?attr/actionBarItemBackground"
-            android:src="@drawable/ic_close_24"
             android:onClick="@{() -> activity.finish()}"
+            android:src="@drawable/ic_close_24"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -53,8 +55,8 @@
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:text="@={card.name}"
-                android:inputType="text" />
+                android:inputType="text"
+                android:text="@={card.name}" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
@@ -71,8 +73,8 @@
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:text="@={card.phone}"
-                android:inputType="phone" />
+                android:inputType="phone"
+                android:text="@={card.phone}" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
@@ -89,8 +91,8 @@
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:text="@={card.email}"
-                android:inputType="textEmailAddress" />
+                android:inputType="textEmailAddress"
+                android:text="@={card.email}" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
@@ -107,35 +109,27 @@
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:text="@={card.business}"
-                android:inputType="text" />
+                android:inputType="text"
+                android:text="@={card.business}" />
         </com.google.android.material.textfield.TextInputLayout>
 
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/tvNewCardColor"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-            android:layout_width="0dp"
+
+        <Spinner
+            android:id="@+id/sNewCardColor"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="16dp"
-            android:hint="@string/label_color"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tvNewCardBusiness">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:text="@={card.backgroundColor}"
-                android:inputType="text" />
-        </com.google.android.material.textfield.TextInputLayout>
+            app:layout_constraintTop_toBottomOf="@+id/tvNewCardBusiness" />
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btConfirm"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_margin="16dp"
-            android:text="@string/label_confirm"
             android:onClick="@{() -> activity.confirmCard()}"
+            android:text="@string/label_confirm"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
